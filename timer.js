@@ -6,6 +6,7 @@ let isStarted = false;
 
 startButton.addEventListener("click", () => {
     let mode = localStorage.getItem("timer");
+    skipButton.style.transform = "scale(0)";
 
     if (mode === "focus") {
         time = document.getElementById("focusTime").value * 60;
@@ -15,33 +16,35 @@ startButton.addEventListener("click", () => {
 
     if(!isStarted){
         liveTimer = setInterval(updateCountdown, 1000);
-        startButton.textContent = "reset";
+        if (mode === "focus") {
+            startButton.textContent = "reset";
+        } else {
+            startButton.textContent = "skip";
+        }
         isStarted = true;
     } else {
         clearInterval(liveTimer);
-        if (mode === "focus") {
-            time = document.getElementById("focusTime").value * 60;
-        } else {
-            time = document.getElementById("breakTime").value * 60;
-        }
+        localStorage.setItem("timer", "focus");
+        time = document.getElementById("focusTime").value * 60;
+        startButton.textContent = "start focus";
+        
         const minutes = Math.floor(time / 60);
         const seconds = time % 60 < 10 ? "0" + (time % 60) : time % 60;
         document.getElementById("time").textContent = `${minutes}:${seconds}`;
-
-        startButton.textContent = "start focus";
+        
         isStarted = false;
     }
 });
 
 skipButton.addEventListener("click", () => {
-    let mode = localStorage.getItem("timer");
+    localStorage.setItem("timer", "focus");
     time = document.getElementById("focusTime").value * 60;
 
     const minutes = Math.floor(time / 60);
     const seconds = time % 60 < 10 ? "0" + (time % 60) : time % 60;
     document.getElementById("time").textContent = `${minutes}:${seconds}`;
 
-    skipButton.style.transform = "scale(1)";
+    skipButton.style.transform = "scale(0)";
     startButton.textContent = "start focus";
 });
 
@@ -54,6 +57,7 @@ function updateCountdown() {
         time--;
     } else {
         let mode = localStorage.getItem("timer");
+        isStarted = false;
 
         if(mode === "focus"){
             startButton.textContent = "start break";
