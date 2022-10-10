@@ -1,9 +1,13 @@
 localStorage.setItem("timer", "focus");
+
 const startButton = document.getElementById("start");
 const skipButton = document.getElementById("skip");
 const saveButton = document.getElementById("save");
 const settingsButton = document.getElementById("settings");
+
 const overlay = document.getElementById("overlay");
+const bell = document.querySelector("audio");
+
 let time, liveTimer;
 let isStarted = false;
 
@@ -88,6 +92,7 @@ function updateCountdown() {
     if (time > 0) {
         time--;
     } else {
+        bell.play();
         let mode = localStorage.getItem("timer");
         isStarted = false;
 
