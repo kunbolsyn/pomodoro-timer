@@ -8,24 +8,37 @@
     <link rel="stylesheet" href="style.css" />
 </head>
 
-<body>
-    <h1>Pomodoro Timer</h1>
-
-    <div id="clock">
-        <span id="time">25:00</span>
-        <audio src="https://drive.google.com/file/d/12IKlFOA3CFcX2Q_9e1ntOpX1XX5J5TLr/preview"></audio>
+<body onload="startText()">
+    <h1>pomodoro-timer</h1>
+        <div id="clock">
+            <span id="time">25:00</span>
+            <audio src="https://drive.google.com/file/d/12IKlFOA3CFcX2Q_9e1ntOpX1XX5J5TLr/preview"></audio>
+            <div id="buttons" style="padding-top: 25px;">
+                <button id="start">start focus</button>
+                <button id="skip" style="transform: scale(0);">skip break</button>
+                <button id="settings">settings</button>
+            </div>
+        </div> 
+    
+    <div class="modal-container">
+        <div id="modal">
+            <div style="padding-bottom: 10px">
+                <label for="focusTime" style="padding-right: 20px">focus time</label>
+                <input type="number" value="25" id="focusTime" />
+            </div>
+            
+            <div  style="padding-bottom: 10px">
+                <label for="breakTime" style="padding-right: 20px">break time</label>
+                <input type="number" value="5" id="breakTime" />
+            </div>
+            
+            <div>
+                <button id="save">save settings</button>
+            </div>
+        </div>
     </div>
 
-    <button id="start">start focus</button>
-    <button id="skip" style="transform: scale(0);">skip break</button>
-
-    <form action=".">
-        <label for="focusTime">Focus Time</label>
-        <input type="number" value="25" id="focusTime" />
-        <label for="breakTime">Break Time</label>
-        <input type="number" value="5" id="breakTime" />
-        <button type="submit">Save settings</button>
-    </form>
+    <div id="overlay"></div>
 
     <script src="timer.js"></script>
 </body>
