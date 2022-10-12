@@ -7,6 +7,7 @@ const settingsButton = document.getElementById("settings");
 
 const overlay = document.getElementById("overlay");
 const bell = document.querySelector("audio");
+const header = document.querySelector("h1");
 
 let time, liveTimer;
 let isStarted = false;
@@ -18,14 +19,20 @@ startButton.addEventListener("click", () => {
 
     if (!isStarted) {
         liveTimer = setInterval(updateCountdown, 1000);
+        header.textContent = mode;
+        
         if (mode === "focus") {
+            document.querySelector("body").style = "background-color: rgb(219, 255, 223)"
             startButton.textContent = "reset";
         } else {
+            document.querySelector("body").style = "background-color: rgb(219, 253, 255)"
             startButton.textContent = "skip";
         }
         isStarted = true;
     } else {
         clearInterval(liveTimer);
+        header.textContent = "pomodoro-timer";
+        document.querySelector("body").style = "background-color: white";
         localStorage.setItem("timer", "focus");
         time = document.getElementById("focusTime").value * 60;
         startButton.textContent = "start focus";
@@ -36,6 +43,9 @@ startButton.addEventListener("click", () => {
 });
 
 skipButton.addEventListener("click", () => {
+    header.textContent = "pomodoro-timer";
+    document.querySelector("body").style = "background-color: white";
+
     localStorage.setItem("timer", "focus");
     time = document.getElementById("focusTime").value * 60;
 
@@ -94,6 +104,8 @@ function updateCountdown() {
     } else {
         bell.play();
         let mode = localStorage.getItem("timer");
+        header.textContent = mode + " time ended";
+        document.querySelector("body").style = "background-color: white";
         isStarted = false;
 
         if (mode === "focus") {
