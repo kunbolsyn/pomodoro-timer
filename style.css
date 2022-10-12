@@ -5,6 +5,7 @@ body {
     flex-direction: column;
     text-align: center;
     font-family: 'Inter', sans-serif;
+    transition: 0.5s ease-in-out;
 }
 
 h1 {
