@@ -10,28 +10,33 @@
 
 <body onload="startText()">
     <h1>pomodoro-timer</h1>
-        <div id="clock">
-            <span id="time">25:00</span>
-            <audio src="https://drive.google.com/file/d/12IKlFOA3CFcX2Q_9e1ntOpX1XX5J5TLr/preview"></audio>
-            <div id="buttons" style="padding-top: 20px;">
-                <button id="start">start focus</button>
-                <button id="skip" style="transform: scale(0);">skip break</button>
-                <button id="settings">settings</button>
-            </div>
-        </div> 
-    
+    <div id="clock">
+        <span id="time">25:00</span>
+        <audio src="audio/bell.mp3"></audio>
+        <div id="buttons" style="padding-top: 20px">
+            <button id="start">start focus</button>
+            <button id="skip" style="display: none">skip break</button>
+            <button id="settings">settings</button>
+        </div>
+    </div>
+
     <div class="modal-container">
         <div id="modal">
             <div style="padding-bottom: 10px">
                 <label for="focusTime" style="padding-right: 20px">focus time</label>
                 <input type="number" value="25" id="focusTime" />
             </div>
-            
-            <div  style="padding-bottom: 10px">
+
+            <div style="padding-bottom: 10px">
                 <label for="breakTime" style="padding-right: 20px">break time</label>
                 <input type="number" value="5" id="breakTime" />
             </div>
-            
+
+            <div style="padding-bottom: 10px">
+                <input type="checkbox" id="notifications" />
+                <label for="notifications" style="margin-left: -80px">send me notifications</label>
+            </div>
+
             <div>
                 <button id="save">save settings</button>
             </div>
